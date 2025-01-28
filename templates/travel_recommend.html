@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>観光スポット推薦システム</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'css/for_interface.css') }}">
+</head>
+
+<body>
+
+    <form id="pref-select-form" action="/岡山県" name="pref_form" method="POST">
+        <div class="pref-select-container">
+            <select name="prefecture" id="pref_select">
+                <option value="岡山県" {% if pref=="岡山県" %} selected {% endif %}>岡山県</option>
+                <option value="京都府" {% if pref=="京都府" %} selected {% endif %}>京都府</option>
+                <option value="佐賀県" {% if pref=="佐賀県" %} selected {% endif %}>佐賀県</option>
+                <!-- <option value="島根県" {% if pref=="島根県" %} selected {% endif %}>島根県</option>
+                <option value="鳥取県" {% if pref=="鳥取県" %} selected {% endif %}>鳥取県</option>
+                <option value="山口県" {% if pref=="山口県" %} selected {% endif %}>山口県</option>
+                <option value="広島県" {% if pref=="広島県" %} selected {% endif %}>広島県</option>
+                <option value="兵庫県" {% if pref=="兵庫県" %} selected {% endif %}>兵庫県</option>
+                <option value="静岡県" {% if pref=="静岡県" %} selected {% endif %}>静岡県</option>
+                <option value="東京都" {% if pref=="東京都" %} selected {% endif %}>東京都</option> -->
+            </select>
+            <input class="button" type="submit" id="pref-select-button" value="移動">
+        </div>
+    </form>
+    <div id="map_info">
+        <div id="mapid"></div>
+        <div id="recommend_spot_info_frame">
+            <div id="recommend_spot_info_header">推薦されたスポット</div>
+            <div id="recommend_spot_info"></div>
+        </div>
+        <!-- スポットの詳細モーダル -->
+        <div id="spotinfo_modal" class="spotinfo_modal">
+            <div class="spotinfo-modal-content">
+                <span class="spot-modal-close-button">&times;</span>
+                <div id="spot-modal-content"></div>
+            </div>
+        </div>
+    </div>
+    <div class="parameters" id="parameters">
+        <form class="search_form" id="search_form" action="/search_form" method="POST">
+            <input type="search" id="search_keyword" name="search_keyword" placeholder="検索キーワード・文を入力">
+            <input type="submit" class="button" id="submit_query" name="submit" value="検索">
+            <div id="makecheckboxes"></div>
+            <input type="button" class="recommend_aspect_button" id="recommend_aspect_button" value="よく見る観点">
+            <input type="button" class="recommend_aspect_button" id="random_aspect_button" value="ランダム観点">
+
+        </form>
+        <div class="selected_results">
+            <div id="head-selected_results">
+                選択した観点
+                <span class='question-tooltip'>?</span>
+                <div class="question-tooltip-content">
+                    選択した観点と類似する観点の評価が高いスポットが推薦されます。観点の優先度を高く設定すると、その観点が優先的に考慮されます。<br>優先度はAが最も高く、Eが最も低いです。
+                </div>
+            </div>
+            <div id="selected_results"></div>
+            <input type="button" class="button" name="delete" id="delete_button" value="全て削除">
+        </div>
+        <div class="recommend_range" role="group">
+            <div style="margin-top: 30px;">
+                推薦範囲:
+                <output id="selected_range"></output> (km)
+                <span class="distance-question-tooltip">?</span>
+                <div class="distance-question-tooltip-content">
+                    推薦対象スポットの範囲を制限できます。観光予定の中心地からの半径が、設定範囲以内のスポットが推薦されます。
+                </div>
+            </div>
+
+
+            <input type="range" name="distance_bar" id="distance_bar" min="1" max="150" step="1" value="100">
+        </div>
+        <input type="button" class="button rerecommend-button" id="rerecommend_button_parm" value="再推薦">
+        <input type="button" class="button close-button" id="close_button_parm" value="閉じる">
+    </div>
+    <input type="button" class="button open-button" id="open_button_parm" value="観点を検索する" style="display:none;">
+    <div class="recommend_style_box" id="recommend_style_box">
+        <div class="recommend_plan" id="plan_level1">
+            <div class="recom_plan_header" id="plan_level1_header">あなたの旅行スタイル</div>
+            <div class="recom_plan_body" id="plan_level1_body">
+                <button class="button" id="modal_level1_openButton">旅行スタイルを選択</button>
+                <button class="deselect_button" id="deselect_button_level1">選択解除</button>
+                <p id="selected_style">何も選択されていません</p>
+            </div>
+            <div id="modal_level1" class="modal_level1">
+                <div class="modal-content-level1">
+                    <span id="modal_level1_closeButton" class="modal-close-button">&times;</span>
+                    <h2 style="text-align: center;">旅行スタイルを選択してください</h2>
+                    <div class="card-container" id="travelStyleContainer">
+                        <div class="card" data-value="エンタメを楽しむ">
+                            エンタメを楽しむ
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                エンタメ,ゲーム,ショー,ライブ,映画館,コンサート,レジャー,イベント,アトラクション,遊園地,演劇,ミュージカル,娯楽,花火,カラオケ,ボーリング
+                            </span>
+                        </div>
+                        <div class="card" data-value="歴史を感じる">
+                            歴史を感じる
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                歴史,遺跡,博物館,城,城跡,史跡,古墳,古代,寺院,遺産,伝説,時代,古い,大正,昭和,明治,戦国,文化財,国宝,天守閣,遺構,文明
+                            </span>
+                        </div>
+                        <div class="card" data-value="教養を高める">
+                            教養を高める
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                教養,学び,書籍,大学,学校,勉強,文化,図書館,科学,歴史,教科書,博物館,研究,学問,文学,哲学,知識,資料
+                            </span>
+                        </div>
+                        <div class="card" data-value="写真映えを狙う">
+                            写真映えを狙う
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                写真,映え,インスタグラム,SNS,撮影,街並み,景色,風景,夜景,紅葉,桜,イルミネーション,展望台,フォト,見晴らし,眺め,シャッター,夕日
+                            </span>
+                        </div>
+                        <div class="card" data-value="買い物を楽しむ">
+                            買い物を楽しむ
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                買い物,ショッピング,市場,特産品,アウトレット,土産,ブランド,雑貨,商品,購買,購入,ファッション,免税,デパート,ショップ,売店
+                            </span>
+                        </div>
+                        <div class="card" data-value="食事を楽しむ">
+                            食事を楽しむ
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                食事,料理,屋台,レストラン,食べ,グルメ,スイーツ,お酒,海産物,和食,洋食,バーベキュー,美味しい,デザート,焼肉,ランチ,テイクアウト,定食,ラーメン,居酒屋,フード,ステーキ,朝食,喫茶,寿司,バイキング,ビュッフェ,ケーキ,肉,野菜,果物
+                            </span>
+                        </div>
+                        <div class="card" data-value="自然を楽しむ">
+                            自然を楽しむ
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                自然,景観,景色,夜景,絶景,展望,山,海,川,森,植物,滝,ハイキング,紅葉,桜,星空,花,砂漠,草原,畑,登山,山岳,緑,木々,森林,渓流,湖
+                            </span>
+                        </div>
+                        <div class="card" data-value="家族で過ごす">
+                            家族で過ごす
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                家族,子供,夫婦,ピクニック,親,兄弟,ファミリー,親子,祖父母,キャンプ,おじいちゃん,おばあちゃん,祖父,祖母,母,父,息子,娘
+                            </span>
+                        </div>
+                        <div class="card" data-value="体験を満喫する">
+                            体験を満喫する
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                体験,手作り,アスレチック,陶芸,乗馬,工芸,サイクリング,ダイビング,イチゴ狩り,ブドウ狩り,農業体験,セグウェイ,射撃,釣り,ジップライン,カヌー,スキー,スノーボード,熱気球,キャンドル,クライミング,サバイバル
+                            </span>
+                        </div>
+                        <div class="card" data-value="アートを楽しむ">
+                            アートを楽しむ
+                            <span class="tooltip">
+                                <span class="tooltip-title">キーワード</span>
+                                <br>
+                                アート,美術,芸術,展示,彫刻,絵画,作品,映像,デザイン,建築,ミュージアム,画家,美術館,展示会
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="button" id="submit_selection_button">選択</button>
+                        <button type="button" class="deselect_button" id="deselect_modal_button">選択解除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="recommend_plan" id="plan_level2">
+            <div class="recom_plan_header" id="plan_level2_header">行ってみたいスポット</div>
+            <div class="recom_plan_body" id="plan_level2_body">
+                <button class="button" id="modal_level2_openButton">スポットを選択</button>
+                <button class="deselect_button" id="deselect_button_level2">選択解除</button>
+                <p id="selected_spot_level2">何も選択されていません</p>
+            </div>
+            <div id="modal_level2" class="modal_level2">
+                <div class="modal-content-level2">
+                    <span class="modal-level2-close-button">&times;</span>
+                    <h2 style="margin-top: 10px;">行ってみたいと感じたスポットを選択してください</h2>
+                    <div class="modal-body">
+                        <div id="spots_container" class="spots-container">
+                            <!-- スポット情報がここに表示されます -->
+                        </div>
+                        <div id="spotinfo_modal_random" class="select-spotinfo-modal">
+                            <div class="select-spotinfo-modal-content">
+                                <span id="close_button_spotinfo_random"
+                                    class="select-spot-modal-close-button">&times;</span>
+                                <div id="spot_modal_content_random"></div>
+                            </div>
+                        </div>
+                        <div id="selected_spots_container" class="selected-spots-container">
+                            <h3>選択したスポット</h3>
+                            <ul id="selected_spots_list">
+                                <!-- 選択したスポットがここにリスト表示されます -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="loading_indicator">読み込み中...</div>
+                    <div class="modal-level2-buttons">
+                        <button id="complete_button" class="button">完了</button>
+                        <button id="deselect_all_button" class="deselect_button">すべて解除</button>
+                        <button id="refresh_spot_button" class="button">違うスポットを見る</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="recommend_plan" id="plan_level3">
+            <div class="recom_plan_header" id="plan_level3_header">行って良かったスポット</div>
+            <div class="recom_plan_body" id="plan_level3_body">
+                <button class="button" id="modal_level3_openButton">スポットを検索</button>
+                <button class="deselect_button" id="deselect_button_level3">選択解除</button>
+                <p id="selected_spot_level3">何も選択されていません</p>
+            </div>
+            <div id="modal_level3" class="modal_level3">
+                <div class="modal-content-level3">
+                    <span class="modal-level3-close-button">&times;</span>
+                    <h2 style="margin-top: 10px;">スポット名や都道府県を検索し、行ってよかったスポットを選択してください</h2>
+                    <div class="search-container">
+                        <input type="search" id="search_input_modal3" placeholder="スポットを検索">
+                        <button id="search_button_modal3" class="button">検索</button>
+                    </div>
+                    <div class="modal3-body">
+                        <div id="spots_container_modal3" class="spots-container">
+                            <!-- スポット情報がここに表示されます -->
+                        </div>
+                        <div id="spotinfo_modal_search" class="select-spotinfo-modal">
+                            <div class="select-spotinfo-modal-content">
+                                <span id="close_button_spotinfo_search"
+                                    class="select-spot-modal-close-button">&times;</span>
+                                <div id="spot_modal_content_search"></div>
+                            </div>
+                        </div>
+                        <div id="selected_spots_container_modal3" class="selected-spots-container">
+                            <h3>選択したスポット</h3>
+                            <ul id="selected_spots_list_modal3">
+                                <!-- 選択したスポットがここにリスト表示されます -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="loading_indicator_modal3">読み込み中...</div>
+                    <div class="modal-level3-buttons">
+                        <button id="complete_button_modal3" class="button">完了</button>
+                        <button id="deselect_all_button_modal3" class="deselect_button">すべて解除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="recom_plan_header" id="recom_plan_header_slider">推薦対象スポットの人気度</div>
+        <div class="recom_plan_body" id="slider_container">
+            <input type="range" min="0" max="14" step="1" value="7" id="locationSlider">
+            <div class="recoomend_spots_labels">
+                <span data-value="0">穴場</span>
+                <span data-value="7">全て</span>
+                <span data-value="14">人気</span>
+            </div>
+
+        </div>
+
+
+        <input type="button" class="button close-button" id="close_button_recom" value="閉じる">
+    </div>
+    <input type="button" class="button open-button" id="open_button_recom" value="推薦条件を追加する" style="display:none;">
+    <div class="fixed-button-container">
+        <input type="button" class="resetButton" name="resetButton" id="resetButton" value="再読み込み">
+    </div>
+    <div class="download-button-container">
+        <button onclick="downloadLogFile()" class="donwloadButton">ログをダウンロード</button>
+    </div>
+    <!-- レビューモーダル -->
+    <div class="review-modal">
+        <div class="review-modal-content">
+            <h2 class="review-modal-header">
+                <span class="review-modal-title">
+                    関連するレビュー
+                </span>
+                <p id="reviewModalNote" class="review-note">※言及数とレビューの数は一致しない場合があります</p>
+                <span class="review-modal-close">&times;</span>
+            </h2>
+            <ul class="review-list">
+                <!-- レビューリストがここに追加されます -->
+            </ul>
+            <button class="different-review-btn button">違うレビューを見る</button>
+        </div>
+    </div>
+
+
+
+    <div id="selected_pref"> {{pref}} </div>
+    <script src="{{ url_for('static',filename = 'js/get_keywords.js') }}"></script>
+    <script src="{{ url_for('static',filename = 'js/add_aspects.js') }}"></script>
+    <script src="{{ url_for('static',filename = 'js/range_bar.js') }}"></script>
+    <script src="{{ url_for('static',filename = 'js/for_interface.js') }}"></script>
+
+</body>
+
+</html>
