@@ -22,7 +22,7 @@ def get_reviews_info():
     return pref_dict
 
 def get_pref_reviews_info(pref):
-    read_aspectAndCluster_folder_path = f"../rev_stat/aspects_from_chatGPT_cluster_with_count_preprocessed/{pref}/"
+    read_aspectAndCluster_folder_path = f"./data/aspects_from_chatGPT_cluster_with_count_preprocessed/{pref}/"
     read_reviews_folder_path = f"../rev_stat/pre_processed_review_txt/{pref}/"
     
     entries = os.listdir(read_aspectAndCluster_folder_path)
