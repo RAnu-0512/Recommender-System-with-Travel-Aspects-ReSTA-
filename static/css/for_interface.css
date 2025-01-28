@@ -1,0 +1,2256 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map_info {
+    height: 100%;
+    display: flex;
+}
+
+
+#mapid {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#distance_bar {
+    width: 100%;
+    margin-top: 4px;
+}
+
+#pref_select {
+    width: 100px;
+    font-size: 18px;
+}
+
+.pref-select-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+#pref-select-button {
+    width: 60px;
+    margin-left: 10px;
+}
+
+#pref-select-form {
+    position: fixed;
+    left: 22px;
+    top: 5px;
+    z-index: 2;
+}
+
+.recom_plan_header {
+    width: 250px;
+    height: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: 1px;
+    background-color: rgba(12, 116, 10, 0.74);
+}
+
+.recom_plan_body {
+    width: 250px;
+    height: 90px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 5px;
+    background-color: rgb(241, 241, 241);
+}
+
+
+
+.header {
+    margin-top: -10px;
+    margin-bottom: -20px;
+}
+
+#header_tag {
+    display: inline-flex;
+    align-items: center;
+}
+
+#selected_pref {
+    margin-left: 15px;
+    position: fixed;
+    bottom: 0px;
+    opacity: 0;
+    z-index: 0;
+}
+
+.recommend_range {
+    display: flex;
+    flex-direction: column;
+}
+
+.highlighted_info {
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 10px;
+    background-color: #bfe7fa;
+    border: 1px solid #7099bed3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.unhighlighted_info {
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 10px;
+    border: 1px solid #9bbcbed3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 文字の色を薄くする */
+}
+
+.normal_info {
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 10px;
+    border: 1px solid #9bbcbed3;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+    /* 子要素の溢れを許可 */
+    position: relative;
+    /* 必要に応じて位置決め */
+}
+
+.button {
+    background-color: rgba(12, 116, 10, 0.74);
+    color: white;
+    border: none;
+    padding: 0px 5px;
+    text-align: center;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+#close_button_recom {
+    position: absolute;
+    bottom: 2px;
+    right: 7px;
+    z-index: 1;
+}
+
+#rerecommend_button_parm {
+    position: absolute;
+    bottom: 7px;
+    right: 67px;
+    z-index: 1;
+}
+
+.close-button {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    z-index: 1;
+}
+
+.open-button {
+    position: fixed;
+    top: 50px;
+    left: 20px;
+    z-index: 1;
+}
+
+.remove_button {
+    background-color: rgba(116, 10, 19, 0.74);
+    color: white;
+    border: none;
+    padding: 2px 2px;
+    text-align: center;
+    height: 23px;
+    width: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.remove_button:hover {
+    background-color: rgba(116, 10, 19);
+}
+
+.button:disabled {
+    opacity: 0.4;
+    /* 透明度を調整して薄く表示 */
+    cursor: not-allowed;
+    /* カーソルを変更してクリックを無効に */
+}
+
+.button:hover {
+    background-color: rgb(12, 116, 10);
+}
+
+#makecheckboxes {
+    margin-top: 10px;
+}
+
+#delete_button {
+    margin-top: 3px;
+    background-color: rgba(116, 10, 19, 0.74);
+}
+
+.deselect_button {
+    margin-top: 2px;
+    background-color: rgba(116, 10, 19, 0.74);
+    color: white;
+    border: none;
+    padding: 0px 5px;
+    text-align: center;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.deselect_button:hover {
+    background-color: rgba(116, 10, 19);
+}
+
+
+#delete_button:hover {
+    background-color: rgba(116, 10, 19);
+}
+
+#fix_aspect {
+    margin-top: 3px;
+}
+
+
+#selected_range {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* 選択結果のスタイル */
+.selected_results {
+    display: block;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+
+.selected_result {
+    width: 90px;
+    font-size: 15px;
+    color: #555;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+.selected_result:hover {
+    color: #000;
+}
+
+.prioritySelectDropdown {
+    padding: 3px 3px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.prioritySelectDropdown:hover {
+    border: 1px solid #888;
+    background-color: #f1f1f1;
+}
+
+/* ドロップダウンリストのオプションのスタイル */
+.prioritySelectDropdown option {
+    background-color: #fff;
+    color: #333;
+}
+
+.prioritySelectDropdown option:hover {
+    background-color: #eee;
+    /* オプションにマウスを乗せたときのスタイル */
+}
+
+#fix_distance {
+    margin-top: 2px;
+}
+
+.fixed-button-container {
+    position: fixed;
+    top: 0;
+    right: 305px;
+    padding: 10px;
+    z-index: 3;
+}
+
+.resetButton {
+    background-color: rgb(218, 105, 105);
+    border-color: rgba(181, 0, 0, 0.81);
+    opacity: 0.7;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    height: 35px;
+    width: 150px;
+    cursor: pointer;
+    /* output 要素の右側にマージンを追加 */
+}
+
+.download-button-container {
+    position: fixed;
+    top: 0;
+    right: 460px;
+    padding: 10px;
+    z-index: 3;
+}
+
+.donwloadButton{
+    background-color: rgb(101 23 169);
+    border-color: rgb(24 2 137 / 81%);
+    opacity: 0.7;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    height: 35px;
+    width: 150px;
+    cursor: pointer;
+    /* output 要素の右側にマージンを追加 */
+}
+
+.recommend_aspect_button {
+    margin-top: 3px;
+    background-color: rgba(12, 116, 10, 0.74);
+    color: white;
+    border: none;
+    padding: 0px 5px;
+    text-align: center;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.recommend_aspect_button:disabled {
+    opacity: 0.4;
+    /* 透明度を調整して薄く表示 */
+    cursor: not-allowed;
+    /* カーソルを変更してクリックを無効に */
+}
+
+.recommend_aspect_button:hover {
+    background-color: rgb(10, 21, 116);
+}
+
+.recommend_range div output {
+    width: 30px;
+    /* 固定したい output 要素の幅 */
+    display: inline-block;
+    /* インラインブロック要素に設定 */
+    margin-right: 5px;
+    /* output 要素の右側にマージンを追加 */
+}
+
+
+.custom_popup {
+    font-size: 16px;
+    /* 好みに応じて適切なフォントサイズを指定 */
+}
+
+.selected_latlng {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#explain {
+    border-bottom: 2px solid grey;
+    /* 下線のスタイルと色を指定 */
+    display: inline;
+    /* ブロック要素からインライン要素に変更 */
+    padding-bottom: 2px;
+    /* 下線とテキストの間隔を調整 */
+}
+
+#search_keyword {
+    width: 70%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* 地図コンテナの角を丸める */
+.leaflet-container {
+    /* border-radius: 20px; */
+    /* 任意の丸みの半径を指定 */
+    overflow: hidden;
+    /* 丸みがはみ出ないようにoverflowをhiddenに設定 */
+}
+
+#recommend_spot_info_frame {
+    padding: 10px;
+    border: 1px solid #ccc;
+    /* border-radius: 20px; */
+    margin-left: 5px;
+    background-color: rgb(238, 238, 238);
+}
+
+#recommend_spot_info {
+    position: relative;
+    height: 95%;
+    width: 250px;
+    cursor: pointer;
+    background-color: rgb(238, 238, 238);
+    overflow-y: scroll;
+}
+
+#recommend_spot_info_header {
+
+    width: 200px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* 太字にする */
+
+}
+
+.star-ratings {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    white-space: nowrap;
+    color: rgb(255, 255, 255);
+}
+
+.star-ratings-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #f5a623;
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+    /* 枠線の太さと色 */
+    z-index: 2;
+}
+
+.star-ratings-bottom {
+    -webkit-text-stroke: 0.5px black;
+    /* 枠線の太さと色 */
+    z-index: 1;
+}
+
+.count-display-title {
+    color: black;
+    margin-left: 20px;
+    width: 95px;
+}
+
+.count-display {
+    color: #c14343;
+}
+
+
+
+#aspect_highlighted {
+    color: #c14343;
+    font-weight: bold;
+}
+
+
+.tooltip-box {
+    position: relative;
+    /* ツールチップの位置決めに必要 */
+}
+
+/* ツールチップの基本スタイル */
+.tooltip-box .tooltip {
+    visibility: hidden;
+    /* デフォルトでは非表示 */
+    width: 140px;
+    background-color: #797979;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* ツールチップの位置 */
+    position: absolute;
+    bottom: 111%;
+    left: -62px;
+
+    /* ツールチップを中央揃え */
+
+    z-index: 1500;
+
+    /* ツールチップのフェードイン効果 */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* ツールチップの矢印 */
+.tooltip-box .tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -17%;
+    left: 46%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #797979 transparent transparent transparent;
+}
+
+
+
+/* ホバー時にツールチップを表示 */
+.tooltip-box:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.aspect-plus-rating {
+    display: flex;
+    align-items: center;
+    /* 上揃え */
+    background-color: rgb(241, 241, 241, 0.5);
+    /* 背景色（オプション） */
+    border: 1px solid #ccc;
+    /* 枠線 */
+    border-radius: 10px;
+    margin-bottom: 3px;
+    padding: 3px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.display-off {
+    opacity: 0.3;
+    /* 透明度を60%に設定 */
+}
+
+.accordion-trigger .aspect-plus-rating {
+    display: flex;
+    align-items: center;
+    /* 上揃え */
+    background-color: rgb(241, 241, 241, 0.0);
+    /* 背景色（オプション） */
+    border: 0 solid #cccccc00;
+    /* 枠線 */
+    border-radius: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-content .aspect-plus-rating {
+    width: 95%;
+    margin-left: 1.5%;
+}
+
+.aspect-plus-rating:hover {
+    background-color: rgb(211, 211, 211, 0.5);
+}
+
+.accordion-trigger .aspect-plus-rating:hover {
+    background-color: rgba(211, 211, 211, 0);
+}
+
+.accordion-trigger {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    align-items: center;
+    /* 上揃え */
+    background-color: rgb(241, 241, 241, 0.5);
+    /* 背景色（オプション） */
+    border: 1px solid #ccc;
+    /* 枠線 */
+    border-radius: 10px;
+    margin-bottom: 3px;
+    padding: 3px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-trigger:hover {
+    background-color: rgb(211, 211, 211, 0.5);
+}
+
+.accordion-trigger::after {
+    content: '\002B';
+    font-size: 1.5em;
+    color: #777;
+    transition: transform 0.3s;
+}
+
+.accordion-trigger.active {
+    background-color: rgb(215 215 215)
+}
+
+.accordion-trigger.active::after {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    display: block;
+}
+
+
+.buttom-aspect-plus-rating {
+    display: none;
+    align-items: flex-start;
+    /* 上揃え */
+    background-color: rgb(241, 241, 241, 0.5);
+    /* 背景色（オプション） */
+    border: 1px solid #ccc;
+    /* 枠線 */
+    border-radius: 10px;
+    margin-bottom: 2px;
+    padding: 2px;
+}
+
+.recommend-factors {
+    margin-left: 20px;
+    width: 50%;
+}
+
+.highlighted_info .buttom-aspect-plus-rating {
+    display: flex;
+}
+
+.highlighted_info .etcStr {
+    display: none;
+}
+
+.etcStr {
+    display: block;
+    text-align: center;
+}
+
+.top-aspect-plus-rating {
+    display: flex;
+    align-items: flex-start;
+    /* 上揃え */
+    background-color: rgb(241, 241, 241, 0.5);
+    /* 背景色（オプション） */
+    border: 1px solid #ccc;
+    /* 枠線 */
+    border-radius: 10px;
+    margin-bottom: 2px;
+    padding: 2px;
+}
+
+.reviewIcon {
+    width: 18px;
+    height: auto;
+    cursor: pointer;
+    margin-left: 2px;
+    transition: transform 0.3s;
+    /* ホバー時のアニメーション */
+}
+.reviewIcon:hover {
+    transform: scale(1.1);
+}
+.reviewIconContainer{
+    position: relative;
+}
+
+/* ツールチップの基本スタイル */
+.review-tooltip {
+    position: absolute;
+    visibility: hidden;
+    width: 120px;
+    font-weight: bold;
+    background-color: #797979;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    bottom: 128%;
+    left: -52px;
+    z-index: 1500;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* ツールチップの矢印 */
+.review-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -27%;
+    left: 46%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #797979 transparent transparent transparent;
+}
+
+/* ホバー時にツールチップを表示 */
+.reviewIconContainer:hover .review-tooltip{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+.aspect-plus-rating .aspect {
+    width: 20%;
+    align-items: center;
+    display: flex;
+}
+
+.aspect-plus-rating .aspect-rating {
+    width: 80%;
+}
+
+.accordion-trigger .aspect-rating {
+    width: 79.7%
+}
+
+.aspect {
+    word-wrap: break-word;
+    flex: 1;
+}
+
+.rating-num {
+    color: #c14343
+}
+
+.aspect-rating {
+    display: flex;
+    align-items: center;
+    right: 5px;
+}
+
+#send_selected_results {
+    display: end;
+    /* 初期状態で非表示 */
+}
+
+#makecheckboxes {
+    width: 230px;
+    /* 任意の幅を指定 */
+    height: 90px;
+    /* 任意の高さを指定 */
+    overflow-y: scroll;
+    background-color: rgb(241, 241, 241);
+}
+
+#makecheckboxes div {
+    display: inline-block;
+    margin-right: 10px;
+    /* チェックボックス間の余白を調整する場合は適宜変更 */
+}
+
+#search_keyword {
+    height: 25px;
+}
+
+.search_form {
+    margin-right: 5px;
+}
+
+#head-selected_results {
+    position: relative;
+    /* ツールチップの位置基準にするために相対位置を設定 */
+    align-items: center;
+    /* 垂直方向に中央揃え */
+    height: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.question-tooltip {
+    display: inline-flex;
+    /* フレックスボックスに変更 */
+    justify-content: center;
+    /* 水平方向に中央揃え */
+    align-items: center;
+    /* 垂直方向に中央揃え */
+    width: 1.2em;
+    height: 1.2em;
+    background: gray;
+    border-radius: 50%;
+    /* 完全な円形にする */
+    color: white;
+    /* テキストの色を白に */
+    margin-left: -4px;
+    /* テキストとの間隔を調整 */
+    cursor: pointer;
+    position: relative;
+    /* ツールチップの位置基準にする */
+}
+
+.question-tooltip-content {
+    display: none;
+    position: absolute;
+    bottom: -115%;
+    left: 142%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #333333db;
+    color: #fff;
+    border-radius: 4px;
+    width: 295px;
+    text-align: left;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
+
+.question-tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: 34%;
+    left: -5px;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #333333db transparent transparent;
+}
+
+.question-tooltip.active+.question-tooltip-content {
+    display: block;
+    /* クラスが追加されたら表示 */
+}
+
+
+
+
+
+
+.distance-question-tooltip {
+    display: inline-flex;
+    /* フレックスボックスに変更 */
+    justify-content: center;
+    /* 水平方向に中央揃え */
+    align-items: center;
+    /* 垂直方向に中央揃え */
+    width: 1.2em;
+    height: 1.2em;
+    background: gray;
+    border-radius: 50%;
+    /* 完全な円形にする */
+    color: white;
+    /* テキストの色を白に */
+    margin-left: -4px;
+    /* テキストとの間隔を調整 */
+    cursor: pointer;
+    position: relative;
+    /* ツールチップの位置基準にする */
+    font-weight: bold;
+}
+
+.distance-question-tooltip-content {
+    display: none;
+    position: absolute;
+    bottom: 49%;
+    left: 124%;
+    transform: translateX(-50%);
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #333333db;
+    color: #fff;
+    border-radius: 4px;
+    width: 295px;
+    text-align: left;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.distance-question-tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: 34%;
+    left: -5px;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #333333db transparent transparent;
+}
+
+.distance-question-tooltip.active+.distance-question-tooltip-content {
+    display: block;
+    /* クラスが追加されたら表示 */
+}
+
+
+
+
+
+
+.selected_aspect_container {
+    justify-content: space-between;
+    width: 97%;
+}
+
+
+#selected_results {
+    width: 245px;
+    /* 任意の幅を指定 */
+    height: 90px;
+    /* 任意の高さを指定 */
+    overflow-y: scroll;
+    background-color: rgb(241, 241, 241);
+}
+
+#selected_results div {
+    margin-bottom: 3px;
+    display: flex;
+    border: 1px solid #ccc;
+    background: rgb(241, 241, 241, 0.5);
+    padding: 2px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+
+/* .howtouse {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+    max-width: 450px;
+    max-height: 175px;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+} */
+
+
+.recommend_style_box {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 460px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 5px;
+    left: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    top: 212px;
+}
+
+
+.parameters {
+    position: fixed;
+    z-index: 2;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 5px;
+    left: 20px;
+    top: 32px;
+}
+
+
+.leaflet-popup-content-wrapper {
+    text-align: center;
+}
+
+.leaflet-popup-content img {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+}
+
+.leaflet-popup-content {
+    max-width: 200px;
+    word-wrap: break-word;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* ーーーーーーーーーーーーーーーーー */
+/* モーダルのスタイル */
+.modal_level1 {
+    display: none;
+    /* 初期状態は非表示 */
+    position: fixed;
+    /* 固定位置 */
+    z-index: 100;
+    /* 他の要素より前面に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* 幅100% */
+    height: 100%;
+    /* 高さ100% */
+    overflow: auto;
+    /* 必要に応じてスクロール */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* 背景の半透明 */
+}
+
+/* モーダルコンテンツのスタイル */
+.modal-content-level1 {
+    background-color: #fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 10%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    /* 幅60% */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 閉じるボタンのスタイル */
+.modal-close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
+/* カードのスタイル */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    position: relative;
+    flex: 1 1 calc(33.333% - 30px);
+    background-color: #f1f1f1;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.card.selected {
+    border-color: #4CAF50;
+    background-color: #e0ffe0;
+}
+
+.card:hover {
+    border-color: #888;
+}
+
+.card:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* ツールチップの基本スタイル */
+.card .tooltip {
+    visibility: hidden;
+    /* デフォルトでは非表示 */
+    width: 300px;
+    background-color: #797979;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+
+    /* ツールチップの位置 */
+    position: absolute;
+    z-index: 1;
+    bottom: 113%;
+    /* 親要素の上に表示 */
+    left: 0%;
+    margin-left: -60px;
+    /* ツールチップを中央揃え */
+
+    /* ツールチップのフェードイン効果 */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* ツールチップの矢印 */
+.card .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    /* ツールチップの下部に配置 */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-title {
+    font-weight: bold;
+}
+
+
+#submit_selection_button {
+    margin-top: 10px;
+}
+
+#selected_style {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 48%;
+    width: 95%;
+    font-weight: bold;
+    color: #555;
+    white-space: pre-line;
+    transition: color 0.3s;
+    overflow: auto;
+}
+
+#selected_style:hover {
+    color: #000;
+}
+
+/* ーーーーーーーーーーーーーーーーー */
+
+
+
+
+/* モーダルのオーバーレイ */
+.modal_level2 {
+    display: none;
+    /* 初期状態は非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* モーダルコンテンツ */
+.modal-content-level2 {
+    position: relative;
+    /* 絶対位置の子要素（閉じるボタン）を相対的に配置 */
+    background-color: #fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    ;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 70%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 必要に応じて調整 */
+}
+
+
+
+/* モーダルボディ */
+.modal-body {
+    display: flex;
+    position: absolute;
+    margin-top: 50px;
+    top: 20px;
+    bottom: 50px;
+    gap: 20px;
+    width: 98%;
+}
+
+/* 閉じるボタンのスタイル */
+.modal-level2-close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-level2-close-button:hover,
+.modal-level2-close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* スポットコンテナ */
+.spots-container {
+    display: flex;
+    /* Flexboxを有効にする */
+    flex-wrap: wrap;
+    /* 必要に応じて折り返す */
+    justify-content: flex-start;
+    /* 左寄せに揃える */
+    gap: 5px;
+    /* アイテム間のスペース */
+    width: 100%;
+    max-height: 500px;
+    padding: 5px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+    padding-right: 10px;
+    background-color: #e5e5e5;
+
+    /* スポットコンテナのスタイル (modal_level3 内専用) */
+}
+
+
+
+
+/* 選択されたスポットコンテナ */
+.selected-spots-container {
+    width: 30%;
+    max-height: 509px;
+    overflow-y: auto;
+    padding-left: 10px;
+    font-size: 15px;
+    border: 1px solid rgba(12, 116, 10, 0.74);
+    border-radius: 4px;
+    background-color: #e9f7ef;
+}
+
+/* 選択されたスポットコンテナのヘッダー */
+#modal_level2 #selected_spots_container h3 {
+    margin-top: 0;
+    color: rgba(12, 116, 10, 0.74);
+    text-align: center;
+    font-size: 18px;
+}
+
+.selected-spots-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.selected-spots-container ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.selected-spots-container ul li .remove-spot {
+    background-color: transparent;
+    border: none;
+    color: #f44336;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.selected-spots-container ul li .remove-spot:hover {
+    color: #d32f2f;
+    /* ホバー時に色を変更 */
+}
+
+/* 各スポットカード */
+.spot-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    height: auto;
+    max-height: 330px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    /* スポットカード間のスペース */
+}
+
+.spot-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* スポット名をリンク風にスタイリング */
+.spotname-in-card {
+    color: #0078A8;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 17px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+}
+
+/* ツールチップの基本スタイル */
+.spotname-in-card .tooltip {
+    visibility: hidden;
+    /* デフォルトでは非表示 */
+    width: 116px;
+    /* 必要に応じて調整 */
+    background-color: #797979;
+    /* 背景色 */
+    color: #fff;
+    /* テキスト色 */
+    text-align: center;
+    /* テキスト中央揃え */
+    border-radius: 6px;
+    /* 角丸 */
+    padding: 5px 0;
+    /* パディング */
+    font-size: 14px;
+    position: absolute;
+    /* 親要素を基準に絶対配置 */
+    top: -70px;
+    /* 親要素の下に配置 */
+    left: 50%;
+    /* 親要素の中央に配置 */
+    transform: translateX(-50%) translateY(10px);
+    /* 水平中央揃えと下方向に少しオフセット */
+
+    opacity: 0;
+    /* デフォルトは透明 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* スムーズな表示/非表示 */
+
+    z-index: 10;
+    /* 他の要素より前面に表示 */
+}
+
+/* ツールチップの矢印 */
+.spotname-in-card .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    /* ツールチップの下部に配置 */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+
+/* ホバー時にツールチップを表示 */
+.spotname-in-card:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.spot-card-prefecture {
+    position: relative;
+    font-size: 14px;
+    margin-top: auto;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.spot-card-aspect {
+    font-weight: bold;
+    color: rgb(68 62 62);
+}
+
+
+/* ツールチップの基本スタイル */
+.tooltip-spot-card-aspect {
+    visibility: hidden;
+    font-size: 14px;
+    width: 110px;
+    background-color: #797979;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 2px 0;
+    position: absolute;
+    top: -28px;
+    right: 45px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+/* ツールチップの矢印 */
+.tooltip-spot-card-aspect::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    /* ツールチップの下部に配置 */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+
+/* ホバー時にツールチップを表示 */
+.spot-card-aspect:hover .tooltip-spot-card-aspect {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* モーダル内ボタンのコンテナ */
+.modal-level2-buttons {
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    /* 初期位置は左寄せ */
+    align-items: center;
+    width: 98%;
+    height: 50px;
+    bottom: 0px;
+    overflow: auto;
+}
+
+/* ボタン共通のスタイル */
+.complete-button,
+.deselect-all-button,
+.refresh-spot-button {
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* 各ボタンの個別スタイル */
+.complete-button {
+    background-color: #4CAF50;
+    /* 緑色 */
+    color: white;
+}
+
+.deselect-all-button {
+    background-color: #f44336;
+    /* 赤色 */
+    color: white;
+}
+
+.refresh-spot-button {
+    background-color: #008CBA;
+    /* 青色 */
+    color: white;
+}
+
+.refresh-spot-button:hover {
+    background-color: #45a049;
+    /* ホバー時に色を変更 */
+}
+
+/* ローディングインジケーター */
+#loading_indicator {
+    display: none;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+    }
+
+    .spots-container,
+    .selected-spots-container {
+        width: 100%;
+        max-height: none;
+        border-right: none;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .spot-card {
+        width: calc(50% - 15px);
+        /* 2列に調整 */
+    }
+
+    .modal-level2-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        overflow: auto;
+    }
+
+    .complete-button,
+    .deselect-all-button,
+    .refresh-spot-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .spot-card {
+        width: 100%;
+        /* 1列に調整 */
+    }
+}
+
+#refresh_spot_button {
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: auto;
+    /* 右側に配置 */
+}
+
+#complete_button {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#deselect_all_button {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#selected_spot_level2 {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 48%;
+    width: 95%;
+    font-weight: bold;
+    color: #555;
+    white-space: pre-line;
+    transition: color 0.3s;
+    overflow: auto;
+}
+
+#selected_spot_level2:hover {
+    color: #000;
+}
+
+
+
+/*------------------------------------*/
+/* モーダルのスタイル */
+.spotinfo_modal {
+    display: none;
+    /* デフォルトでは非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 半透明の背景 */
+}
+
+.spotinfo-modal-content {
+    background-color: #fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    ;
+    margin-bottom: 10%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 700px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.spot-modal-close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.spot-modal-close-button:hover,
+.spot-modal-close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* スポット情報ヘッダーのスタイル */
+.spot-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spotinfo_detailButton:hover {
+    background-color: rgb(12, 116, 10);
+}
+
+/* 「詳細を見る」ボタンのスタイル */
+.spotinfo_detailButton {
+    padding: 5px 10px;
+    background-color: rgba(12, 116, 10, 0.74);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.spotinfo-aspect-type {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    color: rgb(205, 92, 92);
+}
+
+#modal-controls {
+    display: flex;
+    flex-wrap: wrap;
+    /* 要素が溢れる場合に折り返す */
+    gap: 5px;
+    /* 子要素間の間隔 */
+    padding: 5px;
+    /* 任意のパディング */
+}
+
+#modal-controls-randomSpot {
+    padding: 5px
+}
+
+#modal-controls-searchSpot {
+    padding: 5px
+}
+
+/* 各コントロールグループのスタイル */
+.control-group {
+    display: flex;
+    align-items: center;
+    /* ラベルとセレクトボックスを垂直方向に中央揃え */
+}
+
+.control-group label {
+    flex: 0 0 125px;
+    /* 幅を150pxに固定（必要に応じて調整） */
+    font-weight: bold;
+    /* ラベルを太字に */
+    white-space: nowrap;
+    /* ラベルが折り返さないように */
+    margin-right: 8px;
+    margin-left: -15px;
+    text-align: right;
+}
+
+/* セレクトボックスのスタイル */
+.control-group select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    min-width: 225px;
+    /* 必要に応じて最小幅を設定 */
+    margin-right: 20px;
+}
+
+@media (max-width: 600px) {
+    #modal-controls {
+        flex-direction: column;
+        /* 子要素を縦方向に並べる */
+        align-items: flex-start;
+        /* 左揃え */
+    }
+
+    .control-group {
+        width: 100%;
+        /* 各グループを全幅に */
+        flex-direction: column;
+        /* ラベルとセレクトボックスを縦に並べる */
+        align-items: flex-start;
+        /* 左揃え */
+    }
+
+    .control-group label {
+        flex: none;
+        /* 固定幅を解除 */
+        width: 100%;
+        /* ラベルを全幅に */
+        margin-right: 0;
+        /* ラベルとセレクトボックスの間隔をリセット */
+        margin-bottom: 5px;
+        /* ラベルとセレクトボックスの間にスペースを追加 */
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .control-group select {
+        width: 100%;
+        /* セレクトボックスを全幅に */
+    }
+}
+
+
+/* ----------モーダル3----------- */
+/* modal_level3 のスタイル */
+#modal_level3 {
+    display: none;
+    /* 初期状態では非表示 */
+    position: fixed;
+    /* 固定位置 */
+    z-index: 1000;
+    /* modal_level2 より前面に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* 幅100% */
+    height: 100%;
+    /* 高さ100% */
+    overflow: auto;
+    /* 必要に応じてスクロール */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* 半透明の背景 */
+}
+
+/* モーダルコンテンツのスタイル */
+.modal-content-level3 {
+    background-color: #fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 70%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* 閉じるボタンのスタイル */
+#modal_level3 .modal-level3-close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#modal_level3 .modal-level3-close-button:hover,
+#modal_level3 .modal-level3-close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+
+/* 検索コンテナのスタイル */
+#modal_level3 .search-container {
+    width: 98%;
+    position: absolute;
+    top: 60px;
+    margin-bottom: 20px;
+}
+
+#modal_level3 #search_input_modal3 {
+    width: 40%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+
+/* モーダルボディのスタイル */
+#modal_level3 .modal3-body {
+    display: flex;
+    position: absolute;
+    top: 110px;
+    bottom: 50px;
+    gap: 20px;
+    width: 98%;
+}
+
+
+/* 選択されたスポットコンテナのヘッダー */
+#modal_level3 #selected_spots_container_modal3 h3 {
+    margin-top: 0;
+    color: rgba(12, 116, 10, 0.74);
+    text-align: center;
+    font-size: 18px;
+}
+
+/* 選択されたスポットリストのスタイル */
+#modal_level3 #selected_spots_list_modal3 {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+}
+
+#modal_level3 #selected_spots_list_modal3 li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#modal_level3 #selected_spots_list_modal3 li:last-child {
+    border-bottom: none;
+}
+
+#modal_level3 .selected-spots-container .remove-spot {
+    background-color: transparent;
+    border: none;
+    color: #dc3545;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#modal_level3 .selected-spots-container .remove-spot:hover {
+    color: #a71d2a;
+}
+
+
+.spot-card:hover {
+    transform: scale(1.05);
+}
+
+/* チェックボックスとラベルのスタイル (modal_level3 内専用) */
+#modal_level3 .spot-card input[type="checkbox"] {
+    margin-right: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#modal_level2 .spot-card input[type="checkbox"] {
+    margin-right: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#modal_level3 .spot-card label {
+    cursor: pointer;
+    color: #ed6363;
+    font-weight: bold;
+}
+
+#modal_level2 .spot-card label {
+    cursor: pointer;
+    color: #ed6363;
+    font-weight: bold;
+}
+
+/* ローディングインジケーターのスタイル */
+#modal_level3 #loading_indicator_modal3 {
+    display: none;
+    /* 初期状態では非表示 */
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+/* モーダル内ボタンのコンテナスタイル */
+#modal_level3 .modal-level3-buttons {
+    position: absolute;
+    bottom: 5px;
+    margin-top: 20px;
+    width: 98%;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    #modal_level3 .modal-content-level3 {
+        width: 90%;
+    }
+
+    #modal_level3 .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #modal_level3 #search_input_modal3,
+    #modal_level3 #search_button_modal3 {
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    #modal_level3 #search_input_modal3 {
+        margin-bottom: 10px;
+    }
+
+    #modal_level3 .modal3-body {
+        flex-direction: column;
+    }
+
+    #modal_level3 #spots_container_modal3,
+    #modal_level3 #selected_spots_container_modal3 {
+        width: 100%;
+    }
+
+    #modal_level3 .spot-card {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    #modal_level3 .spot-card {
+        width: 100%;
+    }
+}
+
+#selected_spot_level3 {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 48%;
+    width: 95%;
+    font-weight: bold;
+    color: #555;
+    white-space: pre-line;
+    transition: color 0.3s;
+    overflow: auto;
+}
+
+#selected_spot_level3:hover {
+    color: #000;
+}
+
+/* ------------------------ */
+/* 有名所穴場所スライダー */
+
+
+#slider_container {
+    height: 55px;
+
+}
+
+#slider_container input[type=range] {
+    width: 95%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+/* スライダーのバー */
+#slider_container input[type=range]::-webkit-slider-runnable-track {
+    height: 9px;
+    background: #dfdfdf;
+    border-radius: 4px;
+    border: 1px solid #969494;
+    /* border-color を含む */
+    transition: backgrrgb(155, 155, 155) 0.3s;
+    cursor: pointer;
+}
+
+/* スライダーの動かす点 */
+#slider_container input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #5482ff;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -4px;
+    transition: background 0.3s;
+    border: none;
+}
+
+#slider_container input[type=range]:hover::-webkit-slider-thumb {
+    background: #3369ff;
+}
+
+
+.recoomend_spots_labels {
+    display: flex;
+    position: relative;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+
+.recoomend_spots_labels span {
+    position: absolute;
+    transform: translateX(-50%);
+    font-weight: bold;
+    color: #555;
+}
+
+/* 主要ラベルの位置調整 */
+.recoomend_spots_labels span[data-value="0"] {
+    left: 6%;
+    font-size: 14px;
+    color: #555;
+}
+
+.recoomend_spots_labels span[data-value="7"] {
+    left: 50%;
+    font-size: 14px;
+    color: #555;
+}
+
+.recoomend_spots_labels span[data-value="14"] {
+    left: 89%;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #555;
+}
+
+.recoomend_spots_labels span[data-value="0"]:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.recoomend_spots_labels span[data-value="7"]:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.recoomend_spots_labels span[data-value="14"]:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+/* --------------------- */
+.select-spotinfo-modal {
+    display: none;
+    /* デフォルトでは非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 半透明の背景 */
+}
+
+.select-spotinfo-modal-content {
+    background-color: #fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    ;
+    margin-bottom: 10%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 700px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.select-spot-modal-close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.select-spot-modal-close-button:hover,
+.select-spot-modal-close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+/* --------------レビューのモーダル */
+/* レビューモーダルのスタイル */
+.review-modal {
+    display: none;
+    /* モーダルを初期非表示に設定 */
+    position: fixed;
+    z-index: 1000;
+    left: 65%;
+    /* 中央に配置 */
+    top: 100px;
+    height: 70%;
+}
+
+
+
+.review-modal-content {
+    background-color: #fff;
+    padding: 0;
+    /* パディングをリセット */
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    /* 内部のスクロールを管理 */
+}
+
+/* モーダルヘッダーのスタイル */
+.review-modal-header {
+    padding: 0px 5px;
+    background-color: #d3e3fd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
+    z-index: 1000;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: -10px;
+    cursor: move;
+    justify-items: center;
+}
+
+/* タイトルのスタイル */
+.review-modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+.review-note{
+    font-size: 10px;
+    font-weight: 100;
+    margin-top: 0;
+}
+
+/* 閉じるボタンのスタイル */
+.review-modal-close {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    position: absolute;
+    right: 7px;
+    top: 0;
+}
+
+.review-modal-close:hover,
+.review-modal-close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* レビューモーダルコンテンツのスクロール可能部分 */
+.review-modal-content .review-list {
+    list-style: none;
+    padding: 5px 20px;
+    margin-left: 10px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.highlight-entity {
+    font-weight: bold;
+    color: #FF5722;
+    /* オレンジ色に設定（必要に応じて変更可能） */
+}
+
+/* 各レビュー項目のスタイル */
+.review-list li {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* ホバー時の効果 */
+.review-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* テキストのスタイル */
+.review-list li p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
