@@ -23,7 +23,7 @@ def get_reviews_info():
 
 def get_pref_reviews_info(pref):
     read_aspectAndCluster_folder_path = f"./data/aspects_from_chatGPT_cluster_with_count_preprocessed/{pref}/"
-    read_reviews_folder_path = f"../rev_stat/pre_processed_review_txt/{pref}/"
+    read_reviews_folder_path = f"./data/pre_processed_review_txt/{pref}/"
     
     entries = os.listdir(read_aspectAndCluster_folder_path)
     files = [os.path.join(read_aspectAndCluster_folder_path, entry) for entry in entries if os.path.isfile(os.path.join(read_aspectAndCluster_folder_path, entry))]
