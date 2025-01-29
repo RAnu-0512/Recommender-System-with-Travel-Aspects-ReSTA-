@@ -2,6 +2,16 @@
 システム上で「旅行スタイル」「観点」「行ってみたいスポット」「行って良かったスポット」を選択でき、それに基づいてスポットが推薦されます。
 推薦は4つの選択条件の内1つ以上選択することによって行われます。
 
+以下はシステムの動作画面の一連です。
+
+![観点](https://github.com/user-attachments/assets/1917a073-c45b-44d7-9cd4-ff0a22a11432)
+![スタイル](https://github.com/user-attachments/assets/fd2d2d6d-5fb1-4196-a5da-8e9fd2ed028c)
+![行ってみたい](https://github.com/user-attachments/assets/99a852d7-871e-422e-adb6-2ceb197ae47b)
+![行って良かった](https://github.com/user-attachments/assets/3b108827-14c4-459c-a390-d0580372510b)
+![スポット詳細](https://github.com/user-attachments/assets/da358a7f-1b6f-490a-8b9b-c92895a8df2d)
+
+
+
 # システムの具体的な説明
 ## システムの全体像
 ![image](https://github.com/user-attachments/assets/c0cda982-47ee-4d9b-a23e-f7f795d803cf)
@@ -130,15 +140,17 @@ python server.pyでプログラムが実行されます。
 
 python server.py --port ____　でポート番号を指定することができます。
 
-但し、"../wordvec/"のパスに事前に用意したword2vecのベクトルモデルが必要です。
+例えば python server.py --port 8000 な形です。
+
+但し、"../word2vec/"のパスに事前に用意したword2vecのベクトルモデルが必要です。
 
 以下のURLで事前に学習済みの単語ベクトルを取得できます。
 
 https://fasttext.cc/docs/en/crawl-vectors.html
 
-さらに、"../rev_stat/pre_processed_review_txt/<各都道府県>/"のフォルダ上に、レビューを置く必要がある。
-現在の状態では「dummy」のレビューテキストがおかれている。
+word2vecモデルを用意できない方は"server.py"と"return_aspect.py"の"<注意>"のコメントを読み、適宜コメントアウトしてください。
 
+なお、"./data/pre_processed_review_txt/<各都道府県>/"のフォルダ上には、ダミーのレビューデータを用意しているため、実際のレビューはシステム上で確認できません。こちらにレビューテキストを改行で保存することでシステム上でも観点に関連するレビューを確認することができます。
 
 フロントエンドはJavaScript、バックエンドはPythonで、Flaskを利用して構築しています。
 
