@@ -46,8 +46,10 @@ print(".....レビュー情報読み込み完了")
 print(".....word2vecモデル読み込み中")
 #相対パス(relative_path)
 model_path = "../word2vec/cc.ja.300.vec.gz"
-# model = "test_model"  #テストするときのモデル #本番コメントアウト
-model = gensim.models.KeyedVectors.load_word2vec_format(model_path, binary=False) #モデルの読み込み #テストの時コメントアウト
+model = "test_model"  #テストするときのモデル 
+
+#<注意>word2vecモデルがない方は下の行をコメントアウトしてください　word2vecモデルを準備している方はコメントを外してください。
+model = gensim.models.KeyedVectors.load_word2vec_format(model_path, binary=False) #モデルの読み込み 
 print(".....word2vecモデル読み込み完了!!")
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 

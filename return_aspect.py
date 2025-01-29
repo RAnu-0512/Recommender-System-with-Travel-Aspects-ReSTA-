@@ -66,7 +66,7 @@ def divide_list_int(list1,num1):
 # aspects:{apsect1:{vector:vector1,whichFrom:whichFrom,senti_score:senti_score,count:count,count_percentage:count_percentage,fastText_vector:vector},
 #           aspect2:{vector:vector2,...},..},
 # aspectsVector:vector,numOfRev:number,major_aspects:,miner_aspects:,aspects_label:},...}
-#クエリと似ている観点を返す
+#クエリと似ている観点を返す (<注意><観点返却1>word2vecモデルを準備している方は以下の関数を利用してください　また<観点返却2>をコメントアウトしてください)
 def return_aspect(query,spots_info,aspect_top_n,model):
     result = []
     all_aspectsAndvector = []
@@ -81,7 +81,7 @@ def return_aspect(query,spots_info,aspect_top_n,model):
     result = [item[0][0] for item in sorted_aspect[:aspect_top_n]]
     return result
 
-# # #テスト関数 
+# # #テスト関数 (<注意><観点返却2>word2vecモデルがない方は以下の関数を利用してください また<観点返却1>をコメントアウトしてください)
 # def return_aspect(query,spots_info,aspect_top_n,model):
 #     similar_aspect = []
 #     kanzen_icchi = []
